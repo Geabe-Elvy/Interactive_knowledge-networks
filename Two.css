@@ -5,14 +5,14 @@ background-color: White;
 p
 {
 	color: black ;
-	font-family:"Trebuchet MS";
+	font-family:"Times New Roman";
 	text-align: center ;
 }
 h1,h2
 {
 	background-color: #FFFFFF;
 	color: pink;
-	font-family:"Trebuchet MS";
+	font-family:"Times New Roman";
 	border-radius: 10px
 }
 h2
