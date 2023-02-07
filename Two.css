@@ -14,10 +14,7 @@ h1,h2
 	color: black;
 	font-family:"Times New Roman";
 	border-radius: 10px
-}
-h2
-{
-	text-decoration: underline;
+	font-size: 3em
 }
 li
 {
