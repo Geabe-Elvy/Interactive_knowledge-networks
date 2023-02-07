@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1>International Dual Science Knowledge Network in 1995</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1>International Dual Science Knowledge Network in 1995</h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "black"}, "id": "AUSTRALIA", "label": "AUSTRALIA", "shape": "dot", "size": 5, "title": "AUSTRALIA cited by : 4", "value": 4}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "CANADA", "label": "CANADA", "shape": "dot", "size": 6, "title": "CANADA cited by : 5", "value": 5}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "FRANCE", "label": "FRANCE", "shape": "dot", "size": 6, "title": "FRANCE cited by : 5", "value": 5}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "USA", "label": "USA", "shape": "dot", "size": 17, "title": "USA cited by : 16", "value": 16}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "BELGIUM", "label": "BELGIUM", "shape": "dot", "size": 2, "title": "BELGIUM cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "UNITED KINGDOM", "label": "UNITED KINGDOM", "shape": "dot", "size": 10, "title": "UNITED KINGDOM cited by : 9", "value": 9}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "CHINA", "label": "CHINA", "shape": "dot", "size": 2, "title": "CHINA cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "CAMEROON", "label": "CAMEROON", "shape": "dot", "size": 3, "title": "CAMEROON cited by : 2", "value": 2}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "DENMARK", "label": "DENMARK", "shape": "dot", "size": 5, "title": "DENMARK cited by : 4", "value": 4}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "GERMANY", "label": "GERMANY", "shape": "dot", "size": 10, "title": "GERMANY cited by : 9", "value": 9}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "EGYPT", "label": "EGYPT", "shape": "dot", "size": 3, "title": "EGYPT cited by : 2", "value": 2}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "NETHERLANDS.", "label": "NETHERLANDS.", "shape": "dot", "size": 5, "title": "NETHERLANDS. cited by : 4", "value": 4}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "SWITZERLAND", "label": "SWITZERLAND", "shape": "dot", "size": 6, "title": "SWITZERLAND cited by : 5", "value": 5}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "JAPAN", "label": "JAPAN", "shape": "dot", "size": 5, "title": "JAPAN cited by : 4", "value": 4}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "NORWAY", "label": "NORWAY", "shape": "dot", "size": 2, "title": "NORWAY cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "SWEDEN", "label": "SWEDEN", "shape": "dot", "size": 5, "title": "SWEDEN cited by : 4", "value": 4}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "INDIA", "label": "INDIA", "shape": "dot", "size": 3, "title": "INDIA cited by : 2", "value": 2}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "ISRAEL", "label": "ISRAEL", "shape": "dot", "size": 3, "title": "ISRAEL cited by : 2", "value": 2}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "SLOVENIA ", "label": "SLOVENIA ", "shape": "dot", "size": 2, "title": "SLOVENIA  cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "REPUBLIC OF KOREA", "label": "REPUBLIC OF KOREA", "shape": "dot", "size": 2, "title": "REPUBLIC OF KOREA cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "SPAIN", "label": "SPAIN", "shape": "dot", "size": 3, "title": "SPAIN cited by : 2", "value": 2}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "ITALY", "label": "ITALY", "shape": "dot", "size": 3, "title": "ITALY cited by : 2", "value": 2}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "BRAZIL", "label": "BRAZIL", "shape": "dot", "size": 2, "title": "BRAZIL cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "ESTONIA", "label": "ESTONIA", "shape": "dot", "size": 2, "title": "ESTONIA cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "FINLAND", "label": "FINLAND", "shape": "dot", "size": 2, "title": "FINLAND cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "HUNGARY", "label": "HUNGARY", "shape": "dot", "size": 2, "title": "HUNGARY cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "INDONESIA", "label": "INDONESIA", "shape": "dot", "size": 2, "title": "INDONESIA cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "JERSEY", "label": "JERSEY", "shape": "dot", "size": 2, "title": "JERSEY cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "LITHUANIA", "label": "LITHUANIA", "shape": "dot", "size": 2, "title": "LITHUANIA cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "NEW ZEALAND", "label": "NEW ZEALAND", "shape": "dot", "size": 2, "title": "NEW ZEALAND cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "RUSSIAN FEDERATION", "label": "RUSSIAN FEDERATION", "shape": "dot", "size": 2, "title": "RUSSIAN FEDERATION cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "SOUTH AFRICA", "label": "SOUTH AFRICA", "shape": "dot", "size": 2, "title": "SOUTH AFRICA cited by : 1", "value": 1}, {"color": "#97c2fc", "font": {"color": "black"}, "id": "ZIMBABWE", "label": "ZIMBABWE", "shape": "dot", "size": 2, "title": "ZIMBABWE cited by : 1", "value": 1}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#00ccc2", "from": "AUSTRALIA", "title": "AUSTRALIA : Self-citation: 0.1", "to": "AUSTRALIA", "value": 0.1}, {"arrows": "to", "color": "#80e680", "from": "CANADA", "title": "CANADA =\u003e AUSTRALIA : 0.05", "to": "AUSTRALIA", "value": 0.05}, {"arrows": "to", "color": "#80e680", "from": "FRANCE", "title": "FRANCE =\u003e AUSTRALIA : 0.05", "to": "AUSTRALIA", "value": 0.05}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e AUSTRALIA : 0.05", "to": "AUSTRALIA", "value": 0.05}, {"arrows": "to", "color": "#80e680", "from": "AUSTRALIA", "title": "AUSTRALIA =\u003e BELGIUM : 0.08285714285714285", "to": "BELGIUM", "value": 0.08285714285714285}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e BELGIUM : 0.041428571428571426", "to": "BELGIUM", "value": 0.041428571428571426}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e BELGIUM : 0.2899999999999999", "to": "BELGIUM", "value": 0.2899999999999999}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e CANADA : 0.5416666666666666", "to": "CANADA", "value": 0.5416666666666666}, {"arrows": "to", "color": "#00ccc2", "from": "CHINA", "title": "CHINA : Self-citation: 0.2", "to": "CHINA", "value": 0.2}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e CHINA : 0.8", "to": "CHINA", "value": 0.8}, {"arrows": "to", "color": "#80e680", "from": "CAMEROON", "title": "CAMEROON =\u003e DENMARK : 0.049319727891156434", "to": "DENMARK", "value": 0.049319727891156434}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e DENMARK : 0.11836734693877546", "to": "DENMARK", "value": 0.11836734693877546}, {"arrows": "to", "color": "#00ccc2", "from": "DENMARK", "title": "DENMARK : Self-citation: 0.20935374149659855", "to": "DENMARK", "value": 0.20935374149659855}, {"arrows": "to", "color": "#80e680", "from": "EGYPT", "title": "EGYPT =\u003e DENMARK : 0.03452380952380947", "to": "DENMARK", "value": 0.03452380952380947}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e DENMARK : 0.152891156462585", "to": "DENMARK", "value": 0.152891156462585}, {"arrows": "to", "color": "#80e680", "from": "NETHERLANDS.", "title": "NETHERLANDS. =\u003e DENMARK : 0.03452380952380947", "to": "DENMARK", "value": 0.03452380952380947}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e DENMARK : 0.10578231292516999", "to": "DENMARK", "value": 0.10578231292516999}, {"arrows": "to", "color": "#00ccc2", "from": "FRANCE", "title": "FRANCE : Self-citation: 0.18055555555555552", "to": "FRANCE", "value": 0.18055555555555552}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e FRANCE : 0.05555555555555553", "to": "FRANCE", "value": 0.05555555555555553}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e FRANCE : 0.5305555555555556", "to": "FRANCE", "value": 0.5305555555555556}, {"arrows": "to", "color": "#80e680", "from": "CANADA", "title": "CANADA =\u003e GERMANY : 0.03186813186813182", "to": "GERMANY", "value": 0.03186813186813182}, {"arrows": "to", "color": "#80e680", "from": "SWITZERLAND", "title": "SWITZERLAND =\u003e GERMANY : 0.02436974789915962", "to": "GERMANY", "value": 0.02436974789915962}, {"arrows": "to", "color": "#00ccc2", "from": "GERMANY", "title": "GERMANY : Self-citation: 1.3391492494433668", "to": "GERMANY", "value": 1.3391492494433668}, {"arrows": "to", "color": "#80e680", "from": "DENMARK", "title": "DENMARK =\u003e GERMANY : 0.06904761904761901", "to": "GERMANY", "value": 0.06904761904761901}, {"arrows": "to", "color": "#80e680", "from": "EGYPT", "title": "EGYPT =\u003e GERMANY : 0.06904761904761901", "to": "GERMANY", "value": 0.06904761904761901}, {"arrows": "to", "color": "#80e680", "from": "FRANCE", "title": "FRANCE =\u003e GERMANY : 0.06639194139194136", "to": "GERMANY", "value": 0.06639194139194136}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e GERMANY : 0.3177960927960928", "to": "GERMANY", "value": 0.3177960927960928}, {"arrows": "to", "color": "#80e680", "from": "JAPAN", "title": "JAPAN =\u003e GERMANY : 0.06639194139194136", "to": "GERMANY", "value": 0.06639194139194136}, {"arrows": "to", "color": "#80e680", "from": "NORWAY", "title": "NORWAY =\u003e GERMANY : 0.023015873015872948", "to": "GERMANY", "value": 0.023015873015872948}, {"arrows": "to", "color": "#80e680", "from": "SWEDEN", "title": "SWEDEN =\u003e GERMANY : 0.169047619047619", "to": "GERMANY", "value": 0.169047619047619}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e GERMANY : 1.4762551174315879", "to": "GERMANY", "value": 1.4762551174315879}, {"arrows": "to", "color": "#80e680", "from": "CANADA", "title": "CANADA =\u003e INDIA : 0.0909090909090909", "to": "INDIA", "value": 0.0909090909090909}, {"arrows": "to", "color": "#80e680", "from": "SWITZERLAND", "title": "SWITZERLAND =\u003e INDIA : 0.125", "to": "INDIA", "value": 0.125}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e INDIA : 0.125", "to": "INDIA", "value": 0.125}, {"arrows": "to", "color": "#00ccc2", "from": "INDIA", "title": "INDIA : Self-citation: 0.3522727272727273", "to": "INDIA", "value": 0.3522727272727273}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e INDIA : 0.30681818181818177", "to": "INDIA", "value": 0.30681818181818177}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e ISRAEL : 0.0714285714285714", "to": "ISRAEL", "value": 0.0714285714285714}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e ISRAEL : 0.0714285714285714", "to": "ISRAEL", "value": 0.0714285714285714}, {"arrows": "to", "color": "#00ccc2", "from": "ISRAEL", "title": "ISRAEL : Self-citation: 0.21428571428571425", "to": "ISRAEL", "value": 0.21428571428571425}, {"arrows": "to", "color": "#80e680", "from": "SLOVENIA ", "title": "SLOVENIA  =\u003e ISRAEL : 0.0714285714285714", "to": "ISRAEL", "value": 0.0714285714285714}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e ISRAEL : 0.0714285714285714", "to": "ISRAEL", "value": 0.0714285714285714}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e JAPAN : 0.05", "to": "JAPAN", "value": 0.05}, {"arrows": "to", "color": "#00ccc2", "from": "JAPAN", "title": "JAPAN : Self-citation: 0.3333333333333333", "to": "JAPAN", "value": 0.3333333333333333}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e JAPAN : 1.5666666666666667", "to": "JAPAN", "value": 1.5666666666666667}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e NETHERLANDS. : 0.45", "to": "NETHERLANDS.", "value": 0.45}, {"arrows": "to", "color": "#00ccc2", "from": "NETHERLANDS.", "title": "NETHERLANDS. : Self-citation: 0.2", "to": "NETHERLANDS.", "value": 0.2}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e NETHERLANDS. : 1.6", "to": "NETHERLANDS.", "value": 1.6}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e REPUBLIC OF KOREA : 0.2", "to": "REPUBLIC OF KOREA", "value": 0.2}, {"arrows": "to", "color": "#80e680", "from": "JAPAN", "title": "JAPAN =\u003e REPUBLIC OF KOREA : 0.1", "to": "REPUBLIC OF KOREA", "value": 0.1}, {"arrows": "to", "color": "#80e680", "from": "SWEDEN", "title": "SWEDEN =\u003e REPUBLIC OF KOREA : 0.1", "to": "REPUBLIC OF KOREA", "value": 0.1}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e REPUBLIC OF KOREA : 0.1", "to": "REPUBLIC OF KOREA", "value": 0.1}, {"arrows": "to", "color": "#00ccc2", "from": "SPAIN", "title": "SPAIN : Self-citation: 0.5", "to": "SPAIN", "value": 0.5}, {"arrows": "to", "color": "#80e680", "from": "CAMEROON", "title": "CAMEROON =\u003e SWEDEN : 0.01479591836734689", "to": "SWEDEN", "value": 0.01479591836734689}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e SWEDEN : 0.01479591836734689", "to": "SWEDEN", "value": 0.01479591836734689}, {"arrows": "to", "color": "#80e680", "from": "DENMARK", "title": "DENMARK =\u003e SWEDEN : 0.029591836734693865", "to": "SWEDEN", "value": 0.029591836734693865}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e SWEDEN : 0.11836734693877546", "to": "SWEDEN", "value": 0.11836734693877546}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e SWEDEN : 0.029591836734693865", "to": "SWEDEN", "value": 0.029591836734693865}, {"arrows": "to", "color": "#80e680", "from": "AUSTRALIA", "title": "AUSTRALIA =\u003e SWITZERLAND : 0.01785714285714285", "to": "SWITZERLAND", "value": 0.01785714285714285}, {"arrows": "to", "color": "#00ccc2", "from": "SWITZERLAND", "title": "SWITZERLAND : Self-citation: 0.0357142857142857", "to": "SWITZERLAND", "value": 0.0357142857142857}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e SWITZERLAND : 0.1964285714285714", "to": "SWITZERLAND", "value": 0.1964285714285714}, {"arrows": "to", "color": "#80e680", "from": "CANADA", "title": "CANADA =\u003e UNITED KINGDOM : 0.015343915343915328", "to": "UNITED KINGDOM", "value": 0.015343915343915328}, {"arrows": "to", "color": "#80e680", "from": "SWITZERLAND", "title": "SWITZERLAND =\u003e UNITED KINGDOM : 0.005376344086021497", "to": "UNITED KINGDOM", "value": 0.005376344086021497}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e UNITED KINGDOM : 0.010752688172042994", "to": "UNITED KINGDOM", "value": 0.010752688172042994}, {"arrows": "to", "color": "#80e680", "from": "FRANCE", "title": "FRANCE =\u003e UNITED KINGDOM : 0.026881720430107506", "to": "UNITED KINGDOM", "value": 0.026881720430107506}, {"arrows": "to", "color": "#00ccc2", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM : Self-citation: 1.7576932923707118", "to": "UNITED KINGDOM", "value": 1.7576932923707118}, {"arrows": "to", "color": "#80e680", "from": "ITALY", "title": "ITALY =\u003e UNITED KINGDOM : 0.005376344086021497", "to": "UNITED KINGDOM", "value": 0.005376344086021497}, {"arrows": "to", "color": "#80e680", "from": "NETHERLANDS.", "title": "NETHERLANDS. =\u003e UNITED KINGDOM : 0.0625", "to": "UNITED KINGDOM", "value": 0.0625}, {"arrows": "to", "color": "#80e680", "from": "SWEDEN", "title": "SWEDEN =\u003e UNITED KINGDOM : 0.005376344086021497", "to": "UNITED KINGDOM", "value": 0.005376344086021497}, {"arrows": "to", "color": "#80e680", "from": "USA", "title": "USA =\u003e UNITED KINGDOM : 0.5226041133299196", "to": "UNITED KINGDOM", "value": 0.5226041133299196}, {"arrows": "to", "color": "#80e680", "from": "AUSTRALIA", "title": "AUSTRALIA =\u003e USA : 0.37837256697550803", "to": "USA", "value": 0.37837256697550803}, {"arrows": "to", "color": "#80e680", "from": "BELGIUM", "title": "BELGIUM =\u003e USA : 0.09385026737967908", "to": "USA", "value": 0.09385026737967908}, {"arrows": "to", "color": "#80e680", "from": "BRAZIL", "title": "BRAZIL =\u003e USA : 0.02326797385620915", "to": "USA", "value": 0.02326797385620915}, {"arrows": "to", "color": "#80e680", "from": "CANADA", "title": "CANADA =\u003e USA : 0.4882411228209547", "to": "USA", "value": 0.4882411228209547}, {"arrows": "to", "color": "#80e680", "from": "SWITZERLAND", "title": "SWITZERLAND =\u003e USA : 0.31391938876071995", "to": "USA", "value": 0.31391938876071995}, {"arrows": "to", "color": "#80e680", "from": "GERMANY", "title": "GERMANY =\u003e USA : 1.4329068713782334", "to": "USA", "value": 1.4329068713782334}, {"arrows": "to", "color": "#80e680", "from": "DENMARK", "title": "DENMARK =\u003e USA : 0.2339009726697696", "to": "USA", "value": 0.2339009726697696}, {"arrows": "to", "color": "#80e680", "from": "ESTONIA", "title": "ESTONIA =\u003e USA : 0.5", "to": "USA", "value": 0.5}, {"arrows": "to", "color": "#80e680", "from": "SPAIN", "title": "SPAIN =\u003e USA : 0.0328205128205128", "to": "USA", "value": 0.0328205128205128}, {"arrows": "to", "color": "#80e680", "from": "FINLAND", "title": "FINLAND =\u003e USA : 0.0029411764705881745", "to": "USA", "value": 0.0029411764705881745}, {"arrows": "to", "color": "#80e680", "from": "FRANCE", "title": "FRANCE =\u003e USA : 0.5080465519541149", "to": "USA", "value": 0.5080465519541149}, {"arrows": "to", "color": "#80e680", "from": "UNITED KINGDOM", "title": "UNITED KINGDOM =\u003e USA : 1.4431625570218007", "to": "USA", "value": 1.4431625570218007}, {"arrows": "to", "color": "#80e680", "from": "HUNGARY", "title": "HUNGARY =\u003e USA : 0.14862511671335202", "to": "USA", "value": 0.14862511671335202}, {"arrows": "to", "color": "#80e680", "from": "INDONESIA", "title": "INDONESIA =\u003e USA : 0.0029411764705881745", "to": "USA", "value": 0.0029411764705881745}, {"arrows": "to", "color": "#80e680", "from": "ISRAEL", "title": "ISRAEL =\u003e USA : 0.02980392156862745", "to": "USA", "value": 0.02980392156862745}, {"arrows": "to", "color": "#80e680", "from": "INDIA", "title": "INDIA =\u003e USA : 0.05918367346938773", "to": "USA", "value": 0.05918367346938773}, {"arrows": "to", "color": "#80e680", "from": "ITALY", "title": "ITALY =\u003e USA : 0.0869155354449472", "to": "USA", "value": 0.0869155354449472}, {"arrows": "to", "color": "#80e680", "from": "JERSEY", "title": "JERSEY =\u003e USA : 0.0029411764705881745", "to": "USA", "value": 0.0029411764705881745}, {"arrows": "to", "color": "#80e680", "from": "JAPAN", "title": "JAPAN =\u003e USA : 1.163230790514404", "to": "USA", "value": 1.163230790514404}, {"arrows": "to", "color": "#80e680", "from": "REPUBLIC OF KOREA", "title": "REPUBLIC OF KOREA =\u003e USA : 0.013888888888888874", "to": "USA", "value": 0.013888888888888874}, {"arrows": "to", "color": "#80e680", "from": "LITHUANIA", "title": "LITHUANIA =\u003e USA : 0.0065359477124183", "to": "USA", "value": 0.0065359477124183}, {"arrows": "to", "color": "#80e680", "from": "NETHERLANDS.", "title": "NETHERLANDS. =\u003e USA : 0.2553000388913701", "to": "USA", "value": 0.2553000388913701}, {"arrows": "to", "color": "#80e680", "from": "NEW ZEALAND", "title": "NEW ZEALAND =\u003e USA : 0.011196911196911186", "to": "USA", "value": 0.011196911196911186}, {"arrows": "to", "color": "#80e680", "from": "RUSSIAN FEDERATION", "title": "RUSSIAN FEDERATION =\u003e USA : 0.07702614379084965", "to": "USA", "value": 0.07702614379084965}, {"arrows": "to", "color": "#80e680", "from": "SWEDEN", "title": "SWEDEN =\u003e USA : 0.06576126064460866", "to": "USA", "value": 0.06576126064460866}, {"arrows": "to", "color": "#00ccc2", "from": "USA", "title": "USA : Self-citation: 29.21742767273495", "to": "USA", "value": 29.21742767273495}, {"arrows": "to", "color": "#80e680", "from": "SOUTH AFRICA", "title": "SOUTH AFRICA =\u003e USA : 0.02", "to": "USA", "value": 0.02}, {"arrows": "to", "color": "#80e680", "from": "ZIMBABWE", "title": "ZIMBABWE =\u003e USA : 0.00326797385620915", "to": "USA", "value": 0.00326797385620915}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"borderWidth": 2, "borderWidthSelected": 4, "opacity": 0.99, "font": {"size": 100}, "scaling": {"min": 10, "max": 200}, "size": null}, "edges": {"arrows": {"middle": {"enabled": true, "scaleFactor": 0}}, "color": {"inherit": true}, "font": {"size": 50}, "scaling": {"min": 10, "max": 250}, "selfReferenceSize": 150, "selfReference": {"size": 150, "angle": 0.9}, "smooth": {"forceDirection": "True"}}, "physics": {"barnesHut": {"gravitationalConstant": -80000, "springLength": 450, "springConstant": 0.001}, "minVelocity": 0.75}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
